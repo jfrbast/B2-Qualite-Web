@@ -1,7 +1,7 @@
 <script setup>
 import { getRuleById } from '~/data/rules'
 
-const ruleId = 160
+const ruleId = 165
 const rule = getRuleById(ruleId)
 const activeTab = ref('preview')
 </script>
@@ -191,146 +191,169 @@ const activeTab = ref('preview')
           <!-- RENDU -->
           <div v-if="activeTab === 'preview'" class="space-y-4">
             <div class="text-sm text-zinc-400">
-              Exemples de boutons de fermeture visuellement rattachés à leur contenu
+              Exemples de focus clavier visible et non masqué
             </div>
 
-            <!-- Modale avec bouton de fermeture bien positionné -->
+            <!-- Bonne pratique : focus visible -->
             <div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
-              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : bouton dans la modale</div>
-              <div class="relative rounded-lg border border-zinc-700 bg-zinc-900 p-6 max-w-md">
-                <button class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 transition">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : focus clavier visible</div>
+
+              <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4 space-y-3">
+                <div class="text-xs text-zinc-500 mb-2">Cliquez puis utilisez Tab pour naviguer</div>
+
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-zinc-900">
+                  Bouton avec focus visible
                 </button>
 
-                <h3 class="text-lg font-semibold text-zinc-100 mb-2 pr-8">Confirmation</h3>
-                <p class="text-sm text-zinc-300">
-                  Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.
-                </p>
-                <div class="mt-4 flex gap-2">
-                  <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded transition">
-                    Supprimer
-                  </button>
-                  <button class="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-zinc-100 text-sm rounded transition">
-                    Annuler
-                  </button>
+                <input
+                    type="text"
+                    placeholder="Champ texte avec focus"
+                    class="w-full bg-zinc-950 border border-zinc-700 rounded px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                />
+
+                <a href="#" class="inline-block text-blue-400 hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded px-1">
+                  Lien avec focus visible
+                </a>
+
+                <div class="text-xs text-green-400 mt-3">
+                  ✓ Indicateur de focus clair et visible (ring bleu)
                 </div>
               </div>
             </div>
 
-            <!-- Notification avec bouton de fermeture -->
-            <div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
-              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : bouton dans la notification</div>
-              <div class="relative rounded-lg border border-green-800 bg-green-950/30 p-4 max-w-md">
-                <button class="absolute top-3 right-3 text-green-400 hover:text-green-200 transition">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-                <div class="flex gap-3 pr-6">
-                  <div class="text-green-400 text-xl">✓</div>
-                  <div>
-                    <div class="text-sm font-medium text-green-100">Succès</div>
-                    <div class="text-sm text-green-200">Vos modifications ont été enregistrées</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Mauvaise pratique -->
+            <!-- Mauvaise pratique : focus supprimé -->
             <div class="rounded-xl border border-red-900/50 bg-zinc-950 p-5">
-              <div class="text-sm text-red-400 mb-3">❌ Mauvaise pratique : bouton éloigné</div>
-              <div class="space-y-3">
-                <button class="px-3 py-1 bg-zinc-700 text-zinc-300 text-xs rounded">
-                  × Fermer
+              <div class="text-sm text-red-400 mb-3">❌ Mauvaise pratique : outline:none sans remplacement</div>
+
+              <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4 space-y-3">
+                <button class="px-4 py-2 bg-blue-600 text-white text-sm rounded" style="outline: none;">
+                  Bouton sans focus visible
                 </button>
-                <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-6 max-w-md">
-                  <h3 class="text-lg font-semibold text-zinc-100 mb-2">Message important</h3>
-                  <p class="text-sm text-zinc-300">
-                    Le bouton de fermeture n'est pas clairement associé à cette fenêtre.
-                  </p>
+
+                <input
+                    type="text"
+                    placeholder="Champ sans focus visible"
+                    class="w-full bg-zinc-950 border border-zinc-700 rounded px-3 py-2 text-sm text-zinc-100"
+                    style="outline: none;"
+                />
+
+                <div class="text-xs text-red-400 mt-3">
+                  ⚠️ Impossible de voir quel élément est actif au clavier
+                </div>
+              </div>
+            </div>
+
+            <!-- Exemple avec différents styles de focus -->
+            <div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+              <div class="text-sm text-zinc-400 mb-3">Différents styles de focus acceptables</div>
+
+              <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-4 space-y-3">
+                <button class="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-zinc-100 text-sm rounded transition focus:outline-none focus:ring-2 focus:ring-zinc-400">
+                  Ring classique
+                </button>
+
+                <button class="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-zinc-100 text-sm rounded transition focus:outline-none focus:bg-zinc-500 focus:ring-2 focus:ring-blue-400">
+                  Changement de couleur + ring
+                </button>
+
+                <button class="px-4 py-2 bg-zinc-700 text-zinc-100 text-sm rounded transition focus:outline-4 focus:outline-offset-2 focus:outline-blue-500">
+                  Outline personnalisé
+                </button>
+
+                <div class="text-xs text-zinc-400 mt-3">
+                  ✓ Tous ces styles sont acceptables tant que le focus est clairement visible
                 </div>
               </div>
             </div>
 
             <div class="mt-6 pt-6 border-t border-zinc-800 text-xs text-zinc-400 space-y-1">
-              <div>✓ Le bouton de fermeture est placé dans le conteneur de la fenêtre/modale</div>
-              <div>✓ Position cohérente (généralement en haut à droite)</div>
-              <div>✓ Facilement identifiable visuellement</div>
-              <div>✓ Accessible au clavier</div>
+              <div>✓ Le focus clavier doit toujours être visible</div>
+              <div>✓ Ne jamais utiliser outline:none sans alternative</div>
+              <div>✓ Contraste suffisant avec l'arrière-plan</div>
+              <div>✓ Cohérent sur tous les éléments interactifs</div>
             </div>
           </div>
 
           <!-- CODE -->
           <div v-else>
-            <pre class="rounded-xl bg-zinc-950 p-5 overflow-x-auto text-sm text-zinc-100"><code>&lt;!-- ✅ Bonne pratique : Modale avec bouton intégré --&gt;
-&lt;div class=&quot;modal&quot; role=&quot;dialog&quot; aria-labelledby=&quot;modal-title&quot;&gt;
-  &lt;!-- Bouton dans le conteneur de la modale --&gt;
-  &lt;button
-    class=&quot;modal-close&quot;
-    aria-label=&quot;Fermer la fenêtre&quot;
-  &gt;
-    ×
-  &lt;/button&gt;
-
-  &lt;h2 id=&quot;modal-title&quot;&gt;Confirmation&lt;/h2&gt;
-  &lt;p&gt;Êtes-vous sûr de vouloir continuer ?&lt;/p&gt;
-
-  &lt;div class=&quot;modal-actions&quot;&gt;
-    &lt;button&gt;Confirmer&lt;/button&gt;
-    &lt;button&gt;Annuler&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- ✅ Bonne pratique : Notification avec bouton intégré --&gt;
-&lt;div class=&quot;notification&quot; role=&quot;alert&quot;&gt;
-  &lt;button
-    class=&quot;notification-close&quot;
-    aria-label=&quot;Fermer la notification&quot;
-  &gt;
-    ×
-  &lt;/button&gt;
-  &lt;p&gt;Votre action a été effectuée avec succès&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- ❌ Mauvaise pratique : Bouton séparé --&gt;
-&lt;button class=&quot;close-button&quot;&gt;Fermer&lt;/button&gt;
-&lt;div class=&quot;modal&quot;&gt;
-  &lt;!-- Le bouton est en dehors, pas clair qu'il ferme cette modale --&gt;
-  &lt;h2&gt;Message&lt;/h2&gt;
-  &lt;p&gt;Contenu...&lt;/p&gt;
-&lt;/div&gt;
+            <pre class="rounded-xl bg-zinc-950 p-5 overflow-x-auto text-sm text-zinc-100"><code>&lt;!-- ✅ Bonne pratique : Focus visible --&gt;
+&lt;button class=&quot;btn-with-focus&quot;&gt;
+  Cliquez-moi
+&lt;/button&gt;
 
 &lt;style&gt;
-.modal {
-  position: relative;
-  padding: 2rem;
-  background: white;
-  border-radius: 0.5rem;
+.btn-with-focus {
+  /* Styles normaux */
+  padding: 0.5rem 1rem;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
 }
 
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  /* Visuellement rattaché au contenu */
+.btn-with-focus:focus {
+  /* Focus visible et clair */
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
 }
 
-.notification {
-  position: relative;
-  padding: 1rem;
+/* Alternative avec ring */
+.btn-with-focus:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.5);
+}
+&lt;/style&gt;
+
+&lt;!-- ❌ Mauvaise pratique : Focus supprimé --&gt;
+&lt;button class=&quot;btn-no-focus&quot;&gt;
+  Cliquez-moi
+&lt;/button&gt;
+
+&lt;style&gt;
+.btn-no-focus {
+  outline: none; /* MAUVAIS : supprime le focus */
 }
 
-.notification-close {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+/* OU pire encore */
+* {
+  outline: none !important; /* TRÈS MAUVAIS */
 }
+&lt;/style&gt;
+
+&lt;!-- ✅ Bonne pratique : Style personnalisé --&gt;
+&lt;a href=&quot;#&quot; class=&quot;link-custom-focus&quot;&gt;
+  Lien
+&lt;/a&gt;
+
+&lt;style&gt;
+.link-custom-focus {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.link-custom-focus:focus {
+  /* Suppression du outline par défaut */
+  outline: none;
+  /* Mais remplacement par un style visible */
+  background: rgba(0, 102, 204, 0.1);
+  box-shadow: 0 0 0 2px #0066cc;
+  border-radius: 2px;
+}
+&lt;/style&gt;
+
+&lt;!-- ✅ Utilisation de :focus-visible (moderne) --&gt;
+&lt;style&gt;
+button:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Cache le focus au clic souris */
+/* Mais le montre au clavier */
 &lt;/style&gt;</code></pre>
 
             <p class="mt-3 text-xs text-zinc-500">
-              Les mécanismes de fermeture doivent être visuellement rattachés à leur contenu, généralement en les plaçant à l'intérieur du conteneur de la fenêtre ou de la modale, dans un coin (souvent en haut à droite).
+              Le focus clavier ne doit jamais être supprimé ou masqué. Si vous personnalisez le style du focus en supprimant l'outline par défaut, vous devez toujours le remplacer par un indicateur visuel clair (ring, bordure, changement de couleur, ombre, etc.).
             </p>
           </div>
         </div>

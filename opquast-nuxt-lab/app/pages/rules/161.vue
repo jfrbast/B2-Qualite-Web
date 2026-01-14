@@ -1,7 +1,7 @@
 <script setup>
 import { getRuleById } from '~/data/rules'
 
-const ruleId = 160
+const ruleId = 161
 const rule = getRuleById(ruleId)
 const activeTab = ref('preview')
 </script>
@@ -191,146 +191,139 @@ const activeTab = ref('preview')
           <!-- RENDU -->
           <div v-if="activeTab === 'preview'" class="space-y-4">
             <div class="text-sm text-zinc-400">
-              Exemples de boutons de fermeture visuellement rattachés à leur contenu
+              Exemples de boutons de fermeture immédiatement disponibles
             </div>
 
-            <!-- Modale avec bouton de fermeture bien positionné -->
+            <!-- Bonne pratique : bouton visible dès l'ouverture -->
             <div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
-              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : bouton dans la modale</div>
+              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : bouton immédiatement visible</div>
               <div class="relative rounded-lg border border-zinc-700 bg-zinc-900 p-6 max-w-md">
-                <button class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-100 transition">
+                <button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100 transition">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
 
-                <h3 class="text-lg font-semibold text-zinc-100 mb-2 pr-8">Confirmation</h3>
-                <p class="text-sm text-zinc-300">
-                  Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.
+                <h3 class="text-lg font-semibold text-zinc-100 mb-2 pr-8">Alerte importante</h3>
+                <p class="text-sm text-zinc-300 mb-4">
+                  Le bouton de fermeture est visible dès l'apparition de la fenêtre, sans défilement nécessaire.
                 </p>
-                <div class="mt-4 flex gap-2">
-                  <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm rounded transition">
-                    Supprimer
-                  </button>
-                  <button class="px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-zinc-100 text-sm rounded transition">
-                    Annuler
-                  </button>
-                </div>
+                <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition">
+                  Compris
+                </button>
               </div>
             </div>
 
-            <!-- Notification avec bouton de fermeture -->
+            <!-- Bonne pratique : notification avec X visible -->
             <div class="rounded-xl border border-zinc-800 bg-zinc-950 p-5">
-              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : bouton dans la notification</div>
-              <div class="relative rounded-lg border border-green-800 bg-green-950/30 p-4 max-w-md">
-                <button class="absolute top-3 right-3 text-green-400 hover:text-green-200 transition">
+              <div class="text-sm text-zinc-400 mb-3">✓ Bonne pratique : fermeture toujours accessible</div>
+              <div class="relative rounded-lg border border-blue-800 bg-blue-950/30 p-4 max-w-md">
+                <button class="absolute top-3 right-3 w-6 h-6 flex items-center justify-center rounded hover:bg-blue-900 text-blue-400 hover:text-blue-200 transition">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-                <div class="flex gap-3 pr-6">
-                  <div class="text-green-400 text-xl">✓</div>
-                  <div>
-                    <div class="text-sm font-medium text-green-100">Succès</div>
-                    <div class="text-sm text-green-200">Vos modifications ont été enregistrées</div>
-                  </div>
+                <div class="pr-8">
+                  <div class="text-sm font-medium text-blue-100 mb-1">Information</div>
+                  <div class="text-sm text-blue-200">Une mise à jour est disponible pour votre application.</div>
                 </div>
               </div>
             </div>
 
-            <!-- Mauvaise pratique -->
+            <!-- Mauvaise pratique : bouton caché ou en bas -->
             <div class="rounded-xl border border-red-900/50 bg-zinc-950 p-5">
-              <div class="text-sm text-red-400 mb-3">❌ Mauvaise pratique : bouton éloigné</div>
-              <div class="space-y-3">
-                <button class="px-3 py-1 bg-zinc-700 text-zinc-300 text-xs rounded">
-                  × Fermer
+              <div class="text-sm text-red-400 mb-3">❌ Mauvaise pratique : bouton non immédiatement visible</div>
+              <div class="relative rounded-lg border border-zinc-700 bg-zinc-900 p-6 max-w-md max-h-48 overflow-y-auto">
+                <h3 class="text-lg font-semibold text-zinc-100 mb-2">Conditions d'utilisation</h3>
+                <p class="text-sm text-zinc-300 mb-4">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+                </p>
+                <p class="text-sm text-zinc-300 mb-4">
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+                <button class="px-4 py-2 bg-zinc-700 text-zinc-300 text-sm rounded">
+                  Fermer (en bas après défilement)
                 </button>
-                <div class="rounded-lg border border-zinc-700 bg-zinc-900 p-6 max-w-md">
-                  <h3 class="text-lg font-semibold text-zinc-100 mb-2">Message important</h3>
-                  <p class="text-sm text-zinc-300">
-                    Le bouton de fermeture n'est pas clairement associé à cette fenêtre.
-                  </p>
-                </div>
+              </div>
+              <div class="text-xs text-red-400 mt-2">
+                ⚠️ L'utilisateur doit défiler pour trouver le bouton de fermeture
               </div>
             </div>
 
             <div class="mt-6 pt-6 border-t border-zinc-800 text-xs text-zinc-400 space-y-1">
-              <div>✓ Le bouton de fermeture est placé dans le conteneur de la fenêtre/modale</div>
-              <div>✓ Position cohérente (généralement en haut à droite)</div>
-              <div>✓ Facilement identifiable visuellement</div>
-              <div>✓ Accessible au clavier</div>
+              <div>✓ Le bouton de fermeture est visible dès l'ouverture</div>
+              <div>✓ Pas besoin de défiler pour y accéder</div>
+              <div>✓ Position fixe dans la fenêtre (généralement en haut)</div>
+              <div>✓ Visible même si le contenu de la modale nécessite un défilement</div>
             </div>
           </div>
 
           <!-- CODE -->
           <div v-else>
-            <pre class="rounded-xl bg-zinc-950 p-5 overflow-x-auto text-sm text-zinc-100"><code>&lt;!-- ✅ Bonne pratique : Modale avec bouton intégré --&gt;
-&lt;div class=&quot;modal&quot; role=&quot;dialog&quot; aria-labelledby=&quot;modal-title&quot;&gt;
-  &lt;!-- Bouton dans le conteneur de la modale --&gt;
+            <pre class="rounded-xl bg-zinc-950 p-5 overflow-x-auto text-sm text-zinc-100"><code>&lt;!-- ✅ Bonne pratique : Bouton fixe et visible --&gt;
+&lt;div class=&quot;modal&quot; role=&quot;dialog&quot;&gt;
+  &lt;!-- Position fixe en haut, toujours visible --&gt;
   &lt;button
-    class=&quot;modal-close&quot;
-    aria-label=&quot;Fermer la fenêtre&quot;
+    class=&quot;modal-close-fixed&quot;
+    aria-label=&quot;Fermer&quot;
   &gt;
     ×
   &lt;/button&gt;
 
-  &lt;h2 id=&quot;modal-title&quot;&gt;Confirmation&lt;/h2&gt;
-  &lt;p&gt;Êtes-vous sûr de vouloir continuer ?&lt;/p&gt;
-
-  &lt;div class=&quot;modal-actions&quot;&gt;
-    &lt;button&gt;Confirmer&lt;/button&gt;
-    &lt;button&gt;Annuler&lt;/button&gt;
+  &lt;div class=&quot;modal-content&quot;&gt;
+    &lt;h2&gt;Titre&lt;/h2&gt;
+    &lt;!-- Contenu long qui peut défiler --&gt;
+    &lt;div class=&quot;modal-body&quot;&gt;
+      &lt;p&gt;Contenu...&lt;/p&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- ✅ Bonne pratique : Notification avec bouton intégré --&gt;
-&lt;div class=&quot;notification&quot; role=&quot;alert&quot;&gt;
-  &lt;button
-    class=&quot;notification-close&quot;
-    aria-label=&quot;Fermer la notification&quot;
-  &gt;
-    ×
-  &lt;/button&gt;
-  &lt;p&gt;Votre action a été effectuée avec succès&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- ❌ Mauvaise pratique : Bouton séparé --&gt;
-&lt;button class=&quot;close-button&quot;&gt;Fermer&lt;/button&gt;
+&lt;!-- ❌ Mauvaise pratique : Bouton après le contenu --&gt;
 &lt;div class=&quot;modal&quot;&gt;
-  &lt;!-- Le bouton est en dehors, pas clair qu'il ferme cette modale --&gt;
-  &lt;h2&gt;Message&lt;/h2&gt;
-  &lt;p&gt;Contenu...&lt;/p&gt;
+  &lt;div class=&quot;modal-content&quot;&gt;
+    &lt;h2&gt;Titre&lt;/h2&gt;
+    &lt;div class=&quot;modal-body&quot;&gt;
+      &lt;!-- Beaucoup de contenu --&gt;
+      &lt;p&gt;...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;!-- Bouton tout en bas, après défilement --&gt;
+    &lt;button&gt;Fermer&lt;/button&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;style&gt;
 .modal {
-  position: relative;
-  padding: 2rem;
-  background: white;
-  border-radius: 0.5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90vh;
+  overflow: hidden;
 }
 
-.modal-close {
+.modal-close-fixed {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  /* Visuellement rattaché au contenu */
+  z-index: 10;
+  /* Toujours visible, même si le contenu défile */
 }
 
-.notification {
-  position: relative;
-  padding: 1rem;
+.modal-content {
+  padding: 3rem 2rem 2rem;
 }
 
-.notification-close {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  /* Le contenu peut défiler */
+  /* Mais le bouton reste fixe */
 }
 &lt;/style&gt;</code></pre>
 
             <p class="mt-3 text-xs text-zinc-500">
-              Les mécanismes de fermeture doivent être visuellement rattachés à leur contenu, généralement en les plaçant à l'intérieur du conteneur de la fenêtre ou de la modale, dans un coin (souvent en haut à droite).
+              Les mécanismes de fermeture de fenêtres doivent être immédiatement disponibles et visibles dès l'ouverture, sans nécessiter de défilement. Ils doivent rester accessibles même si le contenu de la fenêtre nécessite un défilement.
             </p>
           </div>
         </div>
